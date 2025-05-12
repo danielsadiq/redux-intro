@@ -1,3 +1,4 @@
+import {createStore} from "redux";
 interface StateType {
   balance: number;
   loan: number;
@@ -9,6 +10,7 @@ const initState: StateType = {
   loan: 0,
   loanPurpose: "",
 };
+
 
 function reducer(state = initState, action) {
   switch (action.type) {
@@ -30,3 +32,10 @@ function reducer(state = initState, action) {
       return state;
   }
 }
+const store = createStore(reducer)
+
+store.dispatch({type: "account/deposit", payload: 500});
+store.dispatch({type: "account/withdraw", payload: 200});
+console.log(store.getState());
+
+// store.dispatch({type:"account/requestLoan", payload: {amount:1000, purpose: "Buy a car"}})
